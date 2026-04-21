@@ -1,29 +1,36 @@
 package org.example.Clases;
 
-import org.example.TDAs.TDALista;
+import org.example.TDAs.ListaEnlazada;
 
-public class DatasetsManager implements TDALista {
-    private TDALista DatasetsList;
-    
-    //ver de copiar métodos TDALista.
 
-    public void CreateDataset(int id, String name, int size, String problemType) {
-        for (Dataset dataset : actual) {
-           if (actual.getDato() == dataset.getDato()){
-            System.out.println("Dataset ya existente");
-           }
-           else{
-            lista.add(actual);
-           }
-        }
+public class DatasetsManager {
+    private ListaEnlazada<Dataset> datasetLista;
+
+    public DatasetsManager(){
+        datasetLista = new ListaEnlazada<>();
     }
+
+    public void CreateDataset(int id, String name, int size, TipoProblema problemType) {
+
+        Dataset existente = datasetLista.buscar(d -> d.getId() == id);
+
+    if (existente != null) {
+        throw new IllegalArgumentException("Ya existe un dataset con ID: " + id);
+    }
+
+        Dataset nuevo = new Dataset(id, name, size, problemType);
+        datasetLista.agregar(nuevo);
+    }
+
+
     public Dataset SearchDataset(int id){
-        for (Dataset actual : dataset) {
-           if (actual.getId() == dataset.getId()){
-            return dataset;
-           }
+        Dataset existente = datasetLista.buscar(d -> d.getId() == id);
+        if (existente!= null){
+            return existente;
         }
-        System.out.println("No se encontró un dataset con Id = " + id);
+        else{
+            throw new IllegalArgumentException("No existe un dataset con ID: " + id);
+        }
     }
     public boolean DeleteDataset;
     public String PrintListAllDatasets;
