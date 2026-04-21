@@ -42,4 +42,18 @@ public class Dataset {
     public void setProblemType(TipoProblema problemType) {
         this.problemType = problemType;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Dataset dataset = (Dataset) o;
+        return id == dataset.id;
+    }    
+
+    @Override
+    public String toString() {
+        return "ID: " + id +" | Nombre: " + name +" | Tamaño: " + size +" | Tipo: " + problemType;
+    }
 }

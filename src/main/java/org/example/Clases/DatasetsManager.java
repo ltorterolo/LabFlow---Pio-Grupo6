@@ -32,6 +32,18 @@ public class DatasetsManager {
             throw new IllegalArgumentException("No existe un dataset con ID: " + id);
         }
     }
-    public boolean DeleteDataset;
-    public String PrintListAllDatasets;
+
+    public void DeleteDataset(int id){
+        Dataset dataset = datasetLista.buscar(d -> d.getId() == id);
+
+        if (dataset == null) {
+        throw new IllegalArgumentException("No existe dataset con ID: " + id);
+        }
+
+        datasetLista.remover(dataset);
+    }
+
+    public void PrintListAllDatasets(){
+        datasetLista.imprimir();
+    }
 }
