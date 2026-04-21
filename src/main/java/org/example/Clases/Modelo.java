@@ -4,6 +4,17 @@ package org.example.Clases;
 
 public class Modelo {
     private int id;
+    private String name;
+    private TipoModelo modelType;
+    private String associatedParameters;
+
+    public Modelo(int id, String name, TipoModelo modelType, String associatedParameters){
+        this.id = id;
+        this.name = name;
+        this.modelType = modelType;
+        this.associatedParameters = associatedParameters;
+    }
+
     public int getId() {
         return id;
     }
@@ -11,7 +22,6 @@ public class Modelo {
         this.id = id;
     }
 
-    private String name;
     public String getName() {
         return name;
     }
@@ -19,15 +29,13 @@ public class Modelo {
         this.name = name;
     }
 
-    private String modelType;
-    public String getModelType() {
+    public TipoModelo getModelType() {
         return modelType;
     }
-    public void setModelType(String modelType) {
+    public void setModelType(TipoModelo modelType) {
         this.modelType = modelType;
     }
 
-    private String associatedParameters;
     public String getAssociatedParameters() {
         return associatedParameters;
     }

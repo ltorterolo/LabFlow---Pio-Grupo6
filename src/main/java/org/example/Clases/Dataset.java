@@ -4,6 +4,17 @@ package org.example.Clases;
 
 public class Dataset {
     private int id;
+    private String name;
+    private int size;
+    private TipoProblema problemType;
+
+    public Dataset(int id, String name, int size, TipoProblema problemType){
+        this.id = id;
+        this.name = name;
+        this.size = size;
+        this.problemType = problemType;
+    }
+
     public int getId() {
         return id;
     }
@@ -11,7 +22,6 @@ public class Dataset {
         this.id = id;
     }
 
-    private String name;
     public String getName() {
         return name;
     }
@@ -19,7 +29,6 @@ public class Dataset {
         this.name = name;
     }
 
-    private int size;
     public int getSize() {
         return size;
     }
@@ -27,11 +36,10 @@ public class Dataset {
         this.size = size;
     }
 
-    private String problemType;
-    public String getProblemType() {
+    public TipoProblema getProblemType() {
         return problemType;
     }
-    public void setProblemType(String problemType) {
+    public void setProblemType(TipoProblema problemType) {
         this.problemType = problemType;
     }
 }
