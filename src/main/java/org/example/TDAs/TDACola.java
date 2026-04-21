@@ -1,4 +1,4 @@
-package org.example.Ejercicio17;
+package org.example.TDAs;
 
 /**
  * Define un Tipo de Dato Abstracto (TDA) Cola genérica.

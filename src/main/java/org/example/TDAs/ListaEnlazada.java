@@ -1,4 +1,6 @@
-package org.example.Ejercicio17;
+package org.example.TDAs;
+
+
 
 import java.util.Comparator;
 import java.util.function.Predicate;
