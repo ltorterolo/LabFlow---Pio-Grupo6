@@ -1,18 +1,18 @@
 package org.example.Clases;
-
+import org.example.TDAs.ListaEnlazada;
 
 
 public class Modelo {
     private int id;
     private String name;
     private TipoModelo modelType;
-    private String associatedParameters;
+    private ListaEnlazada<String> associatedParameters;
 
-    public Modelo(int id, String name, TipoModelo modelType, String associatedParameters){
+    public Modelo(int id, String name, TipoModelo modelType ){
         this.id = id;
         this.name = name;
         this.modelType = modelType;
-        this.associatedParameters = associatedParameters;
+        this.associatedParameters = new ListaEnlazada<String>();
     }
 
     public int getId() {
@@ -36,10 +36,10 @@ public class Modelo {
         this.modelType = modelType;
     }
 
-    public String getAssociatedParameters() {
+    public ListaEnlazada<String> getAssociatedParameters() {
         return associatedParameters;
     }
-    public void setAssociatedParameters(String associatedParameters) {
-        this.associatedParameters = associatedParameters;
+    public void addAssociatedParameter(String associatedParameter) {
+        this.associatedParameters.agregar(associatedParameter);
     }
 }
