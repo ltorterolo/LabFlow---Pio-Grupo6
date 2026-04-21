@@ -3,7 +3,7 @@ public class DatasetsManager implements TDALista {
     
     //ver de copiar métodos TDALista.
 
-    public void CreateDataset(int id, String name, int size, String tipoProblema) {
+    public void CreateDataset(int id, String name, int size, String problemType) {
         for (Dataset dataset : actual) {
            if (actual.getDato() == dataset.getDato()){
             System.out.println("Dataset ya existente");

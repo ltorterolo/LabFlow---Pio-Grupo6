@@ -23,11 +23,11 @@ public class Dataset {
         this.size = size;
     }
 
-    private String tipoProblema;
-    public String getTipoProblema() {
-        return tipoProblema;
+    private String problemType;
+    public String getProblemType() {
+        return problemType;
     }
-    public void setTipoProblema(String tipoProblema) {
-        this.tipoProblema = tipoProblema;
+    public void setProblemType(String problemType) {
+        this.problemType = problemType;
     }
 }
