@@ -1,3 +1,7 @@
+package org.example.Clases;
+
+
+
 public class Modelo {
     private int id;
     public int getId() {
