@@ -1,44 +1,42 @@
 package org.example.Clases;
 
-import org.example.TDAs.ListaEnlazada;
-
+import org.example.TDAs.*;
 
 public class DatasetsManager {
-    private ListaEnlazada<Dataset> datasetLista;
-
-    public DatasetsManager(){
-        datasetLista = new ListaEnlazada<>();
-    }
-
-    public void createDataset(int id, String name, int size, TipoProblema problemType) {
-
-        Dataset existente = datasetLista.buscar(d -> d.getId() == id);
-
-        if (existente != null) {
+    private ListaEnlazada<Dataset> datasetList = new ListaEnlazada<Dataset>();
+    public boolean CreateDataset(String id, String name, int size, TipoProblema tipoProblema) {
+        Nodo<Dataset> actual = datasetList.getHead();
+        while (actual != null){
+            if (actual.getDato().getId() == id){
             throw new IllegalArgumentException("Ya existe un dataset con ID: " + id);
+            }
         }
-
-        Dataset nuevo = new Dataset(id, name, size, problemType);
-        datasetLista.agregar(nuevo);
+        datasetList.agregar(new Dataset(id, name, size, tipoProblema));
+        return true;
+    }
+    
+    public Dataset SearchDataset(String id){
+        Nodo<Dataset> actual = datasetList.getHead();
+        while (actual != null) {
+            if (actual.getDato().getId() == id){
+                return actual.getDato();
+            }
+        }
+        System.out.println("No se encontró un dataset con Id = " + id);
+        return null;
     }
 
-
-    public Dataset searchDataset(int id){
-        Dataset existente = datasetLista.buscar(d -> d.getId() == id);
-        if (existente!= null){
-            return existente;
+    public boolean DeleteDataset(String id){
+        Dataset actual = SearchDataset(id);
+        if (actual != null){
+            datasetList.remover(actual);
+            return true;
         }
-        else{
-            throw new IllegalArgumentException("No existe un dataset con ID: " + id);
-        }
+        return false;
     }
 
-    public void deleteDataset(int id){
-        Dataset dataset = searchDataset(id);
-        datasetLista.remover(dataset);
-    }
-
-    public void printListAllDatasets(){
-        datasetLista.imprimir();
+    public boolean PrintListAllDatasets(){
+        datasetList.imprimir();
+        return true;
     }
 }

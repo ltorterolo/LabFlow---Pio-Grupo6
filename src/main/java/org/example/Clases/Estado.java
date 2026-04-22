@@ -1,5 +1,5 @@
 package org.example.Clases;
 
-public enum Estado {
-
+public enum Estado{
+    pendiente, ejecutado
 }

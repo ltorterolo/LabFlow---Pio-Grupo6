@@ -4,15 +4,15 @@ package org.example.Clases;
 
 public class Dataset {
     private int id;
-    private String name;
+    private String nombre;
     private int size;
-    private TipoProblema problemType;
+    private TipoProblema tipoProblema;
 
-    public Dataset(int id, String name, int size, TipoProblema problemType){
+    public Dataset(int id, String nombre, int size, TipoProblema tipoProblema){
         this.id = id;
-        this.name = name;
+        this.nombre = nombre;
         this.size = size;
-        this.problemType = problemType;
+        this.tipoProblema = tipoProblema;
     }
 
     public int getId() {
@@ -22,11 +22,11 @@ public class Dataset {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNombre() {
+        return nombre;
     }
-    public void setName(String name) {
-        this.name = name;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public int getSize() {
@@ -36,11 +36,11 @@ public class Dataset {
         this.size = size;
     }
 
-    public TipoProblema getProblemType() {
-        return problemType;
+    public TipoProblema getTipoProblema() {
+        return tipoProblema;
     }
-    public void setProblemType(TipoProblema problemType) {
-        this.problemType = problemType;
+    public void setTipoProblema(TipoProblema tipoProblema) {
+        this.tipoProblema = tipoProblema;
     }
 
     @Override
@@ -54,6 +54,6 @@ public class Dataset {
 
     @Override
     public String toString() {
-        return "ID: " + id +" | Nombre: " + name +" | Tamaño: " + size +" | Tipo: " + problemType;
+        return "ID: " + id +" | Nombre: " + nombre +" | Tamaño: " + size +" | Tipo: " + tipoProblema;
     }
 }
