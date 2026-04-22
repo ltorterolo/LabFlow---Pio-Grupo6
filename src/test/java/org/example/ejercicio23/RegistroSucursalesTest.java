@@ -1,4 +1,4 @@
-package test.java.org.example.ejercicio23;
+package org.example.ejercicio23;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
