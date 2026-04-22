@@ -10,20 +10,20 @@ public class DatasetsManager {
         datasetLista = new ListaEnlazada<>();
     }
 
-    public void CreateDataset(int id, String name, int size, TipoProblema problemType) {
+    public void createDataset(int id, String name, int size, TipoProblema problemType) {
 
         Dataset existente = datasetLista.buscar(d -> d.getId() == id);
 
-    if (existente != null) {
-        throw new IllegalArgumentException("Ya existe un dataset con ID: " + id);
-    }
+        if (existente != null) {
+            throw new IllegalArgumentException("Ya existe un dataset con ID: " + id);
+        }
 
         Dataset nuevo = new Dataset(id, name, size, problemType);
         datasetLista.agregar(nuevo);
     }
 
 
-    public Dataset SearchDataset(int id){
+    public Dataset searchDataset(int id){
         Dataset existente = datasetLista.buscar(d -> d.getId() == id);
         if (existente!= null){
             return existente;
@@ -33,17 +33,12 @@ public class DatasetsManager {
         }
     }
 
-    public void DeleteDataset(int id){
-        Dataset dataset = datasetLista.buscar(d -> d.getId() == id);
-
-        if (dataset == null) {
-        throw new IllegalArgumentException("No existe dataset con ID: " + id);
-        }
-
+    public void deleteDataset(int id){
+        Dataset dataset = searchDataset(id);
         datasetLista.remover(dataset);
     }
 
-    public void PrintListAllDatasets(){
+    public void printListAllDatasets(){
         datasetLista.imprimir();
     }
 }

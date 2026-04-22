@@ -42,4 +42,19 @@ public class Modelo {
     public void addAssociatedParameter(String associatedParameter) {
         this.associatedParameters.agregar(associatedParameter);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Modelo modelo = (Modelo) o;
+        return id == modelo.id;
+    }    
+
+    @Override
+    public String toString() {
+        return "ID: " + id +" | Nombre: " + name +" | Tipo: " + modelType +" | Parametros: " + associatedParameters;
+    }
+
 }
