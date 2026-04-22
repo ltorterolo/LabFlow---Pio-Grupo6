@@ -6,11 +6,11 @@ public class Experimento {
     private Modelo modelo;
     private Estado estado;
     
-    public Experimento(int id, Dataset dataset, Modelo modelo, Estado estado){
+    public Experimento(int id, Dataset dataset, Modelo modelo){
         this.id = id;
         this.dataset = dataset;
         this.modelo = modelo;
-        this.estado = estado;
+        this.estado = Estado.PENDIENTE;
     }
 
     public int getId(){
@@ -49,7 +49,7 @@ public class Experimento {
         Experimento experimento = (Experimento) o;
         return id == experimento.id;
     }
-    
+
     @Override
     public String toString() {
         return "ID: " + id +" | DatasetId: " + dataset.getId() +" | ModeloId: " + modelo.getId() +" | Estado: " + estado;
