@@ -4,10 +4,18 @@ import org.example.TDAs.ListaEnlazada;
 
 
 public class DatasetsManager {
+    private static DatasetsManager instancia;
     private ListaEnlazada<Dataset> datasetLista;
 
-    public DatasetsManager(){
-        datasetLista = new ListaEnlazada<>();
+    private DatasetsManager(){
+        datasetLista = new ListaEnlazada<Dataset>();
+    }
+
+    public static DatasetsManager getInstance(){
+        if (instancia == null) {
+            instancia = new DatasetsManager();
+        }
+        return instancia;
     }
 
     public void createDataset(int id, String name, int size, TipoProblema problemType) {

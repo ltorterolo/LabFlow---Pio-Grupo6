@@ -3,11 +3,19 @@ import org.example.TDAs.ListaEnlazada;
 
 
 public class ModeloManager{
+    private static ModeloManager instancia;
     private ListaEnlazada<Modelo> modeloLista;
     
-    public ModeloManager(){
+    private ModeloManager(){
         modeloLista = new ListaEnlazada<Modelo>();
     }
+
+    public static ModeloManager getInstance(){
+        if (instancia == null) {
+            instancia = new ModeloManager();
+        }
+        return instancia;
+    }    
 
     public void createModel(int id, String name, TipoModelo modelType) {
         Modelo existente = modeloLista.buscar(m -> m.getId() == id);
