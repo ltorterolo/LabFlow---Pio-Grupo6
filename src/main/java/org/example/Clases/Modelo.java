@@ -4,15 +4,15 @@ import org.example.TDAs.ListaEnlazada;
 
 public class Modelo {
     private int id;
-    private String name;
-    private TipoModelo modelType;
-    private ListaEnlazada<String> associatedParameters;
+    private String nombre;
+    private TipoModelo tipoModelo;
+    private ListaEnlazada<String> parametrosAsociados;
 
-    public Modelo(int id, String name, TipoModelo modelType ){
+    public Modelo(int id, String nombre, TipoModelo tipoModelo ){
         this.id = id;
-        this.name = name;
-        this.modelType = modelType;
-        this.associatedParameters = new ListaEnlazada<String>();
+        this.nombre = nombre;
+        this.tipoModelo = tipoModelo;
+        this.parametrosAsociados = new ListaEnlazada<String>();
     }
 
     public int getId() {
@@ -22,25 +22,25 @@ public class Modelo {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNombre() {
+        return nombre;
     }
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public TipoModelo getModelType() {
-        return modelType;
-    }
-    public void setModelType(TipoModelo modelType) {
-        this.modelType = modelType;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public ListaEnlazada<String> getAssociatedParameters() {
-        return associatedParameters;
+    public TipoModelo getTipoModelo() {
+        return tipoModelo;
     }
-    public void addAssociatedParameter(String associatedParameter) {
-        this.associatedParameters.agregar(associatedParameter);
+    public void setTipoModelo(TipoModelo tipoModelo) {
+        this.tipoModelo = tipoModelo;
+    }
+
+    public ListaEnlazada<String> getParametrosAsociados() {
+        return parametrosAsociados;
+    }
+    public void addParametrosAsociados(String parametrosAsociados) {
+        this.parametrosAsociados.agregar(parametrosAsociados);
     }
 
     @Override
@@ -54,7 +54,7 @@ public class Modelo {
 
     @Override
     public String toString() {
-        return "ID: " + id +" | Nombre: " + name +" | Tipo: " + modelType +" | Parametros: " + associatedParameters;
+        return "ID: " + id +" | Nombre: " + nombre +" | Tipo: " + tipoModelo +" | Parametros: " + parametrosAsociados;
     }
 
 }

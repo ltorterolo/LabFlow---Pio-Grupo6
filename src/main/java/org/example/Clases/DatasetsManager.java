@@ -18,7 +18,7 @@ public class DatasetsManager {
         return instancia;
     }
 
-    public void createDataset(int id, String name, int size, TipoProblema problemType) {
+    public void crearDataset(int id, String name, int size, TipoProblema problemType) {
 
         Dataset existente = datasetLista.buscar(d -> d.getId() == id);
 
@@ -31,7 +31,7 @@ public class DatasetsManager {
     }
 
 
-    public Dataset searchDataset(int id){
+    public Dataset buscarDataset(int id){
         Dataset existente = datasetLista.buscar(d -> d.getId() == id);
         if (existente!= null){
             return existente;
@@ -41,12 +41,12 @@ public class DatasetsManager {
         }
     }
 
-    public void deleteDataset(int id){
-        Dataset dataset = searchDataset(id);
+    public void eliminarDataset(int id){
+        Dataset dataset = buscarDataset(id);
         datasetLista.remover(dataset);
     }
 
-    public void printListAllDatasets(){
+    public void listarDatasets(){
         datasetLista.imprimir();
     }
 }

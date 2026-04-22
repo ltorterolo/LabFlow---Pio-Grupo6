@@ -19,8 +19,8 @@ public class ExperimentoManager {
 
     public void crearExperimento(int expId,int datasetId,int modeloId){
         Experimento existente = experimentoLista.buscar(e -> e.getId() == expId);
-        Dataset dataset = DatasetsManager.getInstance().searchDataset(datasetId);
-        Modelo modelo = ModeloManager.getInstance().searchModel(modeloId);
+        Dataset dataset = DatasetsManager.getInstance().buscarDataset(datasetId);
+        Modelo modelo = ModeloManager.getInstance().buscarModelo(modeloId);
 
         if (existente != null) {
             throw new IllegalArgumentException("Ya existe un experimento con ID: " + expId);
