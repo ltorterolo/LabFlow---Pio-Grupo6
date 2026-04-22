@@ -3,7 +3,9 @@ package org.example.Clases;
 import org.example.TDAs.*;
 
 public class DatasetsManager {
+    
     private ListaEnlazada<Dataset> datasetList = new ListaEnlazada<Dataset>();
+
     public boolean CreateDataset(String id, String name, int size, TipoProblema tipoProblema) {
         Nodo<Dataset> actual = datasetList.getHead();
         while (actual != null){

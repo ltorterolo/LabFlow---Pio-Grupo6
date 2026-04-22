@@ -1,9 +1,7 @@
 package org.example.Clases;
 
-<<<<<<< HEAD
-public class ExperimentoManager {
+import javax.lang.model.util.SimpleAnnotationValueVisitorPreview;
 
-=======
 import org.example.TDAs.ListaEnlazada;
 
 public class ExperimentoManager {
@@ -21,17 +19,14 @@ public class ExperimentoManager {
         return instancia;
     }
 
-    public void crearExperimento(int expId,int datasetId,int modeloId){
-        Experimento existente = experimentoLista.buscar(e -> e.getId() == expId);
-        Dataset dataset = DatasetsManager.getInstance().buscarDataset(datasetId);
-        Modelo modelo = ModeloManager.getInstance().buscarModelo(modeloId);
-
+    public void crearExperimento(String Id, Dataset dataset, Modelo modelo){
+        Experimento existente = experimentoLista.buscar(e -> e.getId() == Id);
+        
         if (existente != null) {
-            throw new IllegalArgumentException("Ya existe un experimento con ID: " + expId);
+            throw new IllegalArgumentException("Ya existe un experimento con ID: " + Id);
         }  
         
-        Experimento nuevo = new Experimento(expId, dataset, modelo);
+        Experimento nuevo = new Experimento(Id, dataset, modelo, Estado.pendiente);
         experimentoLista.agregar(nuevo);
     }
->>>>>>> e558b6ddeebad3aa7914f8b225d205228bde631c
 }

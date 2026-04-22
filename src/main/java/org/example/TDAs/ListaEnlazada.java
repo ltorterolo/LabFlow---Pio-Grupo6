@@ -1,7 +1,5 @@
 package org.example.TDAs;
 
-
-
 import java.util.Comparator;
 import java.util.function.Predicate;
 
@@ -274,26 +272,7 @@ public class ListaEnlazada<T> implements TDALista<T>
         System.out.println(actual.dato);
         actual = actual.siguiente;
     }
-    }
-
-    @Override
-    public String toString() {
-    StringBuilder sb = new StringBuilder("[");
-    Nodo<T> actual = head;
-
-    while (actual != null) {
-        sb.append(actual.dato);
-
-        if (actual.siguiente != null) {
-            sb.append(", ");
-        }
-
-        actual = actual.siguiente;
-    }
-
-    sb.append("]");
-    return sb.toString();
-    }
+}
 }
 
     
