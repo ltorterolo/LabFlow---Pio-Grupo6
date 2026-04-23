@@ -1,9 +1,5 @@
 package org.example.Clases;
 
-<<<<<<< HEAD
-public class ExperimentoManager {
-
-=======
 import org.example.TDAs.ListaEnlazada;
 
 public class ExperimentoManager {
@@ -33,5 +29,4 @@ public class ExperimentoManager {
         Experimento nuevo = new Experimento(expId, dataset, modelo);
         experimentoLista.agregar(nuevo);
     }
->>>>>>> e558b6ddeebad3aa7914f8b225d205228bde631c
 }

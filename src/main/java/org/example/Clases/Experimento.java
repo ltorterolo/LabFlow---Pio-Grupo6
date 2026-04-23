@@ -1,9 +1,6 @@
 package org.example.Clases;
 
 public class Experimento {
-<<<<<<< HEAD
-
-=======
     private int id;
     private Dataset dataset;
     private Modelo modelo;
@@ -57,5 +54,4 @@ public class Experimento {
     public String toString() {
         return "ID: " + id +" | DatasetId: " + dataset.getId() +" | ModeloId: " + modelo.getId() +" | Estado: " + estado;
     }    
->>>>>>> e558b6ddeebad3aa7914f8b225d205228bde631c
 }
