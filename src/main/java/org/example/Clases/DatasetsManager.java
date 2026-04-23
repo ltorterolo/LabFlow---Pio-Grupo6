@@ -2,41 +2,38 @@ package org.example.Clases;
 
 import org.example.TDAs.*;
 
+
 public class DatasetsManager {
     private ListaEnlazada<Dataset> datasetList = new ListaEnlazada<Dataset>();
 
-    public boolean CreateDataset(String id, String name, int size, TipoProblema tipoProblema) {
-        Nodo<Dataset> actual = datasetList.getHead();
-        while (actual != null){
-            if (actual.getDato().getId() == id){
+    public void createDataset(String id, String name, int size, TipoProblema problemType) {
+
+        Dataset existente = datasetList.buscar(d -> d.getId() == id);
+        if (existente != null) {
             throw new IllegalArgumentException("Ya existe un dataset con ID: " + id);
-            }
         }
-        datasetList.agregar(new Dataset(id, name, size, tipoProblema));
-        return true;
+
+        Dataset nuevo = new Dataset(id, name, size, problemType);
+        datasetList.agregar(nuevo);
     }
     
     public Dataset SearchDataset(String id){
-        Dataset existente = datasetList.buscar(m -> m.getId() == id);
-        if (existente!= null){
-            return existente;
+        Nodo<Dataset> actual = datasetList.getHead();
+        while (actual != null) {
+            if (actual.getDato().getId() == id){
+                return actual.getDato();
+            }
         }
-        else{
-            throw new IllegalArgumentException("No existe un dataset con ID: " + id);
-        }      
+        System.out.println("No se encontró un dataset con Id = " + id);
+        return null;
     }
 
-    public boolean DeleteDataset(String id){
-        Dataset actual = SearchDataset(id);
-        if (actual != null){
-            datasetList.remover(actual);
-            return true;
-        }
-        return false;
+    public void eliminarDataset(String id){
+        Dataset dataset = SearchDataset(id);
+        datasetList.remover(dataset);
     }
 
-    public boolean PrintListAllDatasets(){
+    public void listarDatasets(){
         datasetList.imprimir();
-        return true;
     }
 }

@@ -14,23 +14,32 @@ public class Experimento {
     private int eficiencia;
 
 
-    public Experimento(String identificador, Dataset dataset, Modelo modelo, Estado estado){
+    public Experimento(String identificador, Dataset dataset, Modelo modelo){
         this.identificador = identificador;
         this.dataset = dataset;
         this.modelo = modelo;
-        this.estado = estado;
+        this.estado = Estado.PENDIENTE;
     }
 
     public String getId(){
         return identificador;
     }
+    public void setId(String id){
+        this.identificador = id;
+    }
 
     public Dataset getDataset(){
         return dataset;
     }
+    public void setDataset(Dataset dataset){
+        this.dataset = dataset;
+    }
 
     public Modelo getModelo(){
         return modelo;
+    }
+    public void setModelo(Modelo modelo){
+        this.modelo = modelo;
     }
 
     public Estado getEstado(){
@@ -58,9 +67,9 @@ public class Experimento {
     }
 
     public boolean ejecutar(){
-        if (estado == Estado.pendiente)
+        if (estado == Estado.PENDIENTE)
         {
-            estado = Estado.ejecutado;
+            estado = Estado.EJECUTADO;
             this.accuracy = randomInt(1, 100);
             this.precision = randomInt(1, 100);
             this.timeSpent = randomInt(1, 10);

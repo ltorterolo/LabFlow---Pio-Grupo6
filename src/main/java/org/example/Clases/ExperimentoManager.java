@@ -18,7 +18,7 @@ public class ExperimentoManager {
             throw new IllegalArgumentException("Ya existe un experimento con ID: " + Id);
         }  
         
-        Experimento nuevo = new Experimento(Id, dataset, modelo, Estado.pendiente);
+        Experimento nuevo = new Experimento(Id, dataset, modelo);
         experimentoLista.agregar(nuevo);
     }
 

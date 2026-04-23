@@ -1,4 +1,6 @@
 package org.example.Clases;
+import javax.lang.model.util.SimpleAnnotationValueVisitorPreview;
+
 import org.example.TDAs.ListaEnlazada;
 
 
@@ -9,18 +11,18 @@ public class ModeloManager{
         modeloLista = new ListaEnlazada<Modelo>();
     }
 
-    public void createModel(String id, String name, TipoModelo modelType) {
+    public void createModelo(String id, String name, TipoModelo modelType) {
         Modelo existente = modeloLista.buscar(m -> m.getId() == id);
 
         if (existente != null) {
             throw new IllegalArgumentException("Ya existe un modelo con ID: " + id);
         }        
 
-        Modelo nuevo = new Modelo(id, name, modelType);
+        Modelo nuevo = new Modelo(id, name,modelType);
         modeloLista.agregar(nuevo);
     }
 
-    public Modelo searchModel(String id){
+    public Modelo searchModelo(String id){
         Modelo existente = modeloLista.buscar(m -> m.getId() == id);
         if (existente!= null){
             return existente;
@@ -30,18 +32,12 @@ public class ModeloManager{
         }        
     }
 
-    public void addAssociatedParameter(String associatedParameter, String id) {
-        Modelo modelo = searchModel(id);
-        modelo.agregarParametro(associatedParameter);
-    }
-
-
-    public void deleteModel(String id){
-        Modelo modelo = searchModel(id);
+    public void eliminarModelo(String id){
+        Modelo modelo = searchModelo(id);
         modeloLista.remover(modelo);
     }
 
-    public void printListAllModels(){
+    public void listarModelos(){
         modeloLista.imprimir();
     }
 }

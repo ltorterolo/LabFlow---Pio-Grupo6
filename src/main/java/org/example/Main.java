@@ -10,10 +10,10 @@ public class Main {
         DatasetsManager datasets = new DatasetsManager();
         ModeloManager modelos = new ModeloManager();
         
-        datasets.CreateDataset("123", "Dataset1", 13, TipoProblema.CLASIFICACION);
-        modelos.createModel("abc", "Modelo Básico", TipoModelo.RED_NEURONAL);
+        datasets.createDataset("123", "Dataset1", 13, TipoProblema.CLASIFICACION);
+        modelos.createModelo("abc", "Modelo Básico", TipoModelo.RED_NEURONAL);
         
-        Modelo m1 = modelos.searchModel("abc");
+        Modelo m1 = modelos.searchModelo("abc");
         Dataset d1 = datasets.SearchDataset("123");
 
         experimentos.crearExperimento("abc-123", d1, m1);
