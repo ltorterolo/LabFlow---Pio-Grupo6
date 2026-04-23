@@ -37,8 +37,13 @@ public class Experimento {
     public Estado getEstado(){
         return estado;
     }
-    public void setDataset(Estado estado){
-        this.estado = estado;
+    public void cambiarEstado(){
+        if(estado==Estado.PENDIENTE){
+            this.estado = Estado.EJECUTADO;
+        }
+        else{
+            this.estado = Estado.PENDIENTE;
+        }
     }
 
     @Override
