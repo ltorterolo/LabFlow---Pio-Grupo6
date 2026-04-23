@@ -1,22 +1,14 @@
 package org.example.Clases;
 
-import javax.lang.model.util.SimpleAnnotationValueVisitorPreview;
+import java.util.Comparator;
 
-import org.example.TDAs.ListaEnlazada;
+import org.example.TDAs.*;
 
 public class ExperimentoManager {
-    private static ExperimentoManager instancia;
     private ListaEnlazada<Experimento> experimentoLista;
 
-    private ExperimentoManager(){
+    public ExperimentoManager(){
         experimentoLista = new ListaEnlazada<Experimento>();
-    }
-
-    public static ExperimentoManager getInstance(){
-        if (instancia == null) {
-            instancia = new ExperimentoManager();
-        }
-        return instancia;
     }
 
     public void crearExperimento(String Id, Dataset dataset, Modelo modelo){
@@ -28,5 +20,27 @@ public class ExperimentoManager {
         
         Experimento nuevo = new Experimento(Id, dataset, modelo, Estado.pendiente);
         experimentoLista.agregar(nuevo);
+    }
+
+    public Experimento searchExperimento(String id){
+        Experimento existente = experimentoLista.buscar(m -> m.getId() == id);
+        if (existente!= null){
+            return existente;
+        }
+        else{
+            throw new IllegalArgumentException("No existe un experimento con ID: " + id);
+        }      
+    }
+
+    public void listarPorModelo(){
+        Comparator<Experimento> comp = ((e1, e2) -> e1.getModelo().getId().compareTo(e2.getModelo().getId()));
+        experimentoLista = experimentoLista.ordenar(comp);
+        experimentoLista.imprimir();
+    }
+
+    public void listarPorDataset(){
+        Comparator<Experimento> comp = ((e1, e2) -> e1.getDataset().getId().compareTo(e2.getDataset().getId()));
+        experimentoLista = experimentoLista.ordenar(comp);
+        experimentoLista.imprimir();
     }
 }

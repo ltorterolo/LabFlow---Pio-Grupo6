@@ -208,7 +208,7 @@ public class ListaEnlazada<T> implements TDALista<T>
         return null;
     }
 
-    public TDALista<T> ordenar(Comparator<T> comparator){
+    public ListaEnlazada<T> ordenar(Comparator<T> comparator){
         ListaEnlazada<T> listaOrdenada= new ListaEnlazada<>();
         Nodo<T> actual = this.head;
 
@@ -219,6 +219,7 @@ public class ListaEnlazada<T> implements TDALista<T>
         }
         return listaOrdenada;
     }
+
     public int tamaño(){
         int size = 0;
         Nodo<T> actual = head;
@@ -266,13 +267,12 @@ public class ListaEnlazada<T> implements TDALista<T>
     actual.siguiente = nuevo;
     }
     public void imprimir() {
-    Nodo<T> actual = head;
-
-    while (actual != null) {
-        System.out.println(actual.dato);
-        actual = actual.siguiente;
+        Nodo<T> actual = head;
+        while (actual != null) {
+            System.out.println(actual.dato);
+            actual = actual.siguiente;
+        }
     }
-}
 }
 
     

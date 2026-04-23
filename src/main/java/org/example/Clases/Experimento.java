@@ -1,11 +1,18 @@
 package org.example.Clases;
 
+import java.util.random.*;
 
 public class Experimento {
-    String identificador; 
-    Dataset dataset;
-    Modelo modelo;
-    Estado estado;
+    private String identificador; 
+    private Dataset dataset;
+    private Modelo modelo;
+    private Estado estado;
+
+    private int accuracy;
+    private int precision;
+    private int timeSpent;
+    private int eficiencia;
+
 
     public Experimento(String identificador, Dataset dataset, Modelo modelo, Estado estado){
         this.identificador = identificador;
@@ -30,15 +37,39 @@ public class Experimento {
         return estado;
     }
 
-    public Estado changeEstado(){
-        if (estado == Estado.ejecutado)
+    public int getAcuraccy(){
+        return this.accuracy;
+    }
+
+    public int getPrecision(){
+        return this.precision;
+    }
+
+    public int getTimeSpent(){
+        return this.timeSpent;
+    }
+
+    public int getEficiencia(){
+        return this.eficiencia;
+    }
+
+    public int randomInt(int min, int max){
+            return (int)(Math.random() * (max - min + 1)) + min;
+    }
+
+    public boolean ejecutar(){
+        if (estado == Estado.pendiente)
         {
-            estado = Estado.pendiente;
-            
+            estado = Estado.ejecutado;
+            this.accuracy = randomInt(1, 100);
+            this.precision = randomInt(1, 100);
+            this.timeSpent = randomInt(1, 10);
+            this.eficiencia = accuracy*precision/timeSpent;
+            ImpresoraHistorial.imprimir("Experimento - ID: " + identificador + ", eficiencia: " + eficiencia);
+            return true;
         }
         else{
-            estado = Estado.ejecutado;
-        }       
-        return estado;
+            throw new IllegalArgumentException("Este experimento ya fue ejecutado");
+        }
     }
 }

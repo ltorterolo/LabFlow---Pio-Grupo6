@@ -1,4 +1,4 @@
-package org.example.TDAs;
+ package org.example.TDAs;
 
 
 
@@ -10,7 +10,7 @@ public class Nodo<T> {
         this.siguiente = siguiente;
     }
     //metodo equals que invoque el equals del dato tipo t.
-    public T dato() {
+    public T getDato() {
        return this.dato;
     }
 }
