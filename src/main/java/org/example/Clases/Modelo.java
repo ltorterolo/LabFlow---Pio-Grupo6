@@ -6,7 +6,7 @@ public class Modelo {
     private String identificador; 
     private String nombre; 
     private TipoModelo tipo;
-    private ListaEnlazada<String> parametrosAsociados;
+    private ListaEnlazada<String> parametrosAsociados = new ListaEnlazada<>();
 
     public Modelo(String identificador, String nombre, TipoModelo tipo){
         this.identificador = identificador;

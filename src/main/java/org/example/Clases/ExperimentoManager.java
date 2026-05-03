@@ -1,6 +1,7 @@
 package org.example.Clases;
 
 import java.util.Comparator;
+import java.util.Objects;
 
 import org.example.TDAs.*;
 
@@ -12,7 +13,7 @@ public class ExperimentoManager {
     }
 
     public void crearExperimento(String Id, Dataset dataset, Modelo modelo){
-        Experimento existente = experimentoLista.buscar(e -> e.getId() == Id);
+        Experimento existente = experimentoLista.buscar(e -> Objects.equals(e.getId(), Id));
         
         if (existente != null) {
             throw new IllegalArgumentException("Ya existe un experimento con ID: " + Id);
@@ -23,7 +24,7 @@ public class ExperimentoManager {
     }
 
     public Experimento searchExperimento(String id){
-        Experimento existente = experimentoLista.buscar(m -> m.getId() == id);
+        Experimento existente = experimentoLista.buscar(m -> Objects.equals(m.getId(), id));
         if (existente!= null){
             return existente;
         }

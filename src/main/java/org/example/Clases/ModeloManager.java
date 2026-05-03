@@ -1,7 +1,7 @@
 package org.example.Clases;
-import javax.lang.model.util.SimpleAnnotationValueVisitorPreview;
 
 import org.example.TDAs.ListaEnlazada;
+import java.util.Objects;
 
 
 public class ModeloManager{
@@ -12,7 +12,7 @@ public class ModeloManager{
     }
 
     public void createModelo(String id, String name, TipoModelo modelType) {
-        Modelo existente = modeloLista.buscar(m -> m.getId() == id);
+        Modelo existente = modeloLista.buscar(m -> Objects.equals(m.getId(), id));
 
         if (existente != null) {
             throw new IllegalArgumentException("Ya existe un modelo con ID: " + id);
@@ -23,7 +23,7 @@ public class ModeloManager{
     }
 
     public Modelo searchModelo(String id){
-        Modelo existente = modeloLista.buscar(m -> m.getId() == id);
+        Modelo existente = modeloLista.buscar(m -> Objects.equals(m.getId(), id));
         if (existente!= null){
             return existente;
         }
