@@ -44,4 +44,29 @@ public class ExperimentoManager {
         experimentoLista = experimentoLista.ordenar(comp);
         experimentoLista.imprimir();
     }
+
+    public ListaEnlazada<Experimento> buscarExperimentoEjecutadoPorModelo(String modeloId){
+        ListaEnlazada<Experimento> resultados = new ListaEnlazada<>();
+        Nodo<Experimento> actual = experimentoLista.getHead();
+        while (actual.siguiente!=null){
+            if(actual.dato.getModelo().getId().equals(modeloId) && actual.dato.getEstado() == Estado.EJECUTADO){
+                resultados.agregar(actual.dato);
+            }
+            actual = actual.siguiente;
+        }
+        return resultados;
+    }
+
+    public ListaEnlazada<Experimento> buscarExperimentoEjecutadoPorDataset(String datasetId){
+        ListaEnlazada<Experimento> resultados = new ListaEnlazada<>();
+        Nodo<Experimento> actual = experimentoLista.getHead();
+        while (actual.siguiente!=null){
+            if(actual.dato.getDataset().getId().equals(datasetId) && actual.dato.getEstado() == Estado.EJECUTADO){
+                resultados.agregar(actual.dato);
+            }
+            actual = actual.siguiente;
+        }
+        return resultados;
+    }
 }
+
