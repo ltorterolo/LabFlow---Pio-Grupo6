@@ -48,7 +48,7 @@ public class ExperimentoManager {
     public ListaEnlazada<Experimento> buscarExperimentoEjecutadoPorModelo(String modeloId){
         ListaEnlazada<Experimento> resultados = new ListaEnlazada<>();
         Nodo<Experimento> actual = experimentoLista.getHead();
-        while (actual.siguiente!=null){
+        while (actual!=null){
             if(actual.dato.getModelo().getId().equals(modeloId) && actual.dato.getEstado() == Estado.EJECUTADO){
                 resultados.agregar(actual.dato);
             }
@@ -60,7 +60,7 @@ public class ExperimentoManager {
     public ListaEnlazada<Experimento> buscarExperimentoEjecutadoPorDataset(String datasetId){
         ListaEnlazada<Experimento> resultados = new ListaEnlazada<>();
         Nodo<Experimento> actual = experimentoLista.getHead();
-        while (actual.siguiente!=null){
+        while (actual!=null){
             if(actual.dato.getDataset().getId().equals(datasetId) && actual.dato.getEstado() == Estado.EJECUTADO){
                 resultados.agregar(actual.dato);
             }
