@@ -28,13 +28,16 @@ public class DatasetsManager {
             }
             actual = actual.siguiente;
         }
-        System.out.println("No se encontró un dataset con Id = " + id);
-        return null;
+        throw new IllegalArgumentException("No existe un dataset con ID: " + id);
     }
 
     public void eliminarDataset(String id){
         Dataset dataset = SearchDataset(id);
         datasetList.remover(dataset);
+    }
+
+    public ListaEnlazada<Dataset> getDatasetList() {
+        return datasetList;
     }
 
     public void listarDatasets(){

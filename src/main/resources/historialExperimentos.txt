@@ -1,3 +1,1 @@
-Experimento - ID: abc-123, eficiencia: 108
-Experimento - ID: abc-123, eficiencia: 1366
-Experimento - ID: abc-123, eficiencia: 264
+Experimento - ID: M1-D1, eficiencia: 184, accuracy: 23, precision: 24, tiempo: 3

@@ -30,4 +30,9 @@ public class Modelo {
         parametrosAsociados.agregar(parametro);
         return true;
     }
+
+    @Override
+    public String toString(){
+        return "ID: " + identificador + ", Nombre: " + nombre + ", Tipo: " + tipo + ", Parámetros: " + parametrosAsociados.toString();
+    }
 }

@@ -26,5 +26,9 @@ public class Dataset {
         this.size=size;
         this.tipoProblema=tipoProblema;
     }
-    
+
+    @Override
+    public String toString(){
+        return "ID: " + id + ", Nombre: " + name + ", Tamaño: " + size + ", TipoProblema: " + tipoProblema;
+    }
 }

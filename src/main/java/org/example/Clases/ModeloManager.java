@@ -11,7 +11,7 @@ public class ModeloManager{
         modeloLista = new ListaEnlazada<Modelo>();
     }
 
-    public void createModelo(String id, String name, TipoModelo modelType) {
+    public Modelo createModelo(String id, String name, TipoModelo modelType) {
         Modelo existente = modeloLista.buscar(m -> Objects.equals(m.getId(), id));
 
         if (existente != null) {
@@ -20,6 +20,7 @@ public class ModeloManager{
 
         Modelo nuevo = new Modelo(id, name,modelType);
         modeloLista.agregar(nuevo);
+        return nuevo;
     }
 
     public Modelo searchModelo(String id){
@@ -35,6 +36,10 @@ public class ModeloManager{
     public void eliminarModelo(String id){
         Modelo modelo = searchModelo(id);
         modeloLista.remover(modelo);
+    }
+
+    public ListaEnlazada<Modelo> getModeloList() {
+        return modeloLista;
     }
 
     public void listarModelos(){

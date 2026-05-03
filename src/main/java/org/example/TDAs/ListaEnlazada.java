@@ -275,6 +275,31 @@ public class ListaEnlazada<T> implements TDALista<T>
             actual = actual.siguiente;
         }
     }
+
+    public void agregarTodos(ListaEnlazada<T> elementosAgregar) {
+        if (elementosAgregar == null || elementosAgregar.esVacio()) {
+            return;
+        }
+        Nodo<T> actual = elementosAgregar.head;
+        while (actual != null) {
+            T dato = actual.dato;
+            this.agregar(actual.dato);
+            actual = actual.siguiente;
+        }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("[");
+        Nodo<T> actual = head;
+        while (actual != null) {
+            sb.append(actual.dato);
+            if (actual.siguiente != null) sb.append(", ");
+            actual = actual.siguiente;
+        }
+        sb.append("]");
+        return sb.toString();
+    }
 }
 
     

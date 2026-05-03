@@ -46,7 +46,7 @@ public class Experimento {
         return estado;
     }
 
-    public int getAcuraccy(){
+    public int getAccuracy(){
         return this.accuracy;
     }
 
@@ -74,11 +74,16 @@ public class Experimento {
             this.precision = randomInt(1, 100);
             this.timeSpent = randomInt(1, 10);
             this.eficiencia = accuracy*precision/timeSpent;
-            ImpresoraHistorial.imprimir("Experimento - ID: " + identificador + ", eficiencia: " + eficiencia);
+            ImpresoraHistorial.imprimir("Experimento - ID: " + identificador + ", eficiencia: " + eficiencia + ", accuracy: " + accuracy + ", precision: " + precision + ", tiempo: " + timeSpent);
             return true;
         }
         else{
             throw new IllegalArgumentException("Este experimento ya fue ejecutado");
         }
+    }
+
+    @Override
+    public String toString(){
+        return "Experimento - ID: " + identificador + ", eficiencia: " + eficiencia + ", accuracy: " + accuracy + ", precision: " + precision + ", tiempo: " + timeSpent + ", estado: " + estado;
     }
 }

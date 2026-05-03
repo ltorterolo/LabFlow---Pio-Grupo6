@@ -6,50 +6,106 @@ import java.util.Objects;
 import org.example.TDAs.*;
 
 public class ExperimentoManager {
-    private ListaEnlazada<Experimento> experimentoLista;
+    private ListaEnlazada<Experimento> experimentosNoEjecutados;
+    private ListaEnlazada<Experimento> experimentosEjecutados;
 
     public ExperimentoManager(){
-        experimentoLista = new ListaEnlazada<Experimento>();
+        experimentosNoEjecutados = new ListaEnlazada<>();
+        experimentosEjecutados = new ListaEnlazada<>();
     }
 
     public void crearExperimento(String Id, Dataset dataset, Modelo modelo){
-        Experimento existente = experimentoLista.buscar(e -> Objects.equals(e.getId(), Id));
-        
+        Experimento existente = experimentosNoEjecutados.buscar(e -> Objects.equals(e.getId(), Id));
+
         if (existente != null) {
             throw new IllegalArgumentException("Ya existe un experimento con ID: " + Id);
-        }  
-        
+        }
+        existente = experimentosEjecutados.buscar(e -> Objects.equals(e.getId(), Id));
+        if (existente != null) {
+            throw new IllegalArgumentException("Ya existe un experimento con ID: " + Id);
+        }
+
         Experimento nuevo = new Experimento(Id, dataset, modelo);
-        experimentoLista.agregar(nuevo);
+        experimentosNoEjecutados.agregar(nuevo);
     }
 
     public Experimento searchExperimento(String id){
-        Experimento existente = experimentoLista.buscar(m -> Objects.equals(m.getId(), id));
+        Experimento existente = experimentosNoEjecutados.buscar(m -> Objects.equals(m.getId(), id));
         if (existente!= null){
             return existente;
         }
         else{
+            existente = experimentosEjecutados.buscar(m -> Objects.equals(m.getId(), id));
+            if (existente != null){
+                return existente;
+            }
             throw new IllegalArgumentException("No existe un experimento con ID: " + id);
         }      
     }
 
-    public void listarPorModelo(){
-        Comparator<Experimento> comp = ((e1, e2) -> e1.getModelo().getId().compareTo(e2.getModelo().getId()));
-        experimentoLista = experimentoLista.ordenar(comp);
-        experimentoLista.imprimir();
+    public ListaEnlazada<Experimento> listarPorModelo(){
+        ListaEnlazada<Experimento> todosLosExperimentos = new ListaEnlazada<>();
+        todosLosExperimentos.agregarTodos(experimentosNoEjecutados);
+        todosLosExperimentos.agregarTodos(experimentosEjecutados);
+        Comparator<Experimento> comp = (Comparator.comparing(e -> e.getModelo().getId()));
+        todosLosExperimentos = todosLosExperimentos.ordenar(comp);
+        todosLosExperimentos.imprimir();
+        return todosLosExperimentos;
     }
 
-    public void listarPorDataset(){
-        Comparator<Experimento> comp = ((e1, e2) -> e1.getDataset().getId().compareTo(e2.getDataset().getId()));
-        experimentoLista = experimentoLista.ordenar(comp);
-        experimentoLista.imprimir();
+    public ListaEnlazada<Experimento> listarPorDataset(){
+        ListaEnlazada<Experimento> todosLosExperimentos = new ListaEnlazada<>();
+        todosLosExperimentos.agregarTodos(experimentosNoEjecutados);
+        todosLosExperimentos.agregarTodos(experimentosEjecutados);
+        Comparator<Experimento> comp = (Comparator.comparing(e -> e.getDataset().getId()));
+        todosLosExperimentos = todosLosExperimentos.ordenar(comp);
+        todosLosExperimentos.imprimir();
+        return todosLosExperimentos;
+    }
+
+    public ListaEnlazada<Experimento> buscarTodosPorModelo(String modeloId){
+        ListaEnlazada<Experimento> resultados = new ListaEnlazada<>();
+        Nodo<Experimento> actual = experimentosNoEjecutados.getHead();
+        while (actual!=null){
+            if(actual.dato.getModelo().getId().equals(modeloId)){
+                resultados.agregar(actual.dato);
+            }
+            actual = actual.siguiente;
+        }
+        actual = experimentosEjecutados.getHead();
+        while (actual!=null){
+            if(actual.dato.getModelo().getId().equals(modeloId)){
+                resultados.agregar(actual.dato);
+            }
+            actual = actual.siguiente;
+        }
+        return resultados;
+    }
+
+    public ListaEnlazada<Experimento> buscarTodosPorDataset(String datasetId){
+        ListaEnlazada<Experimento> resultados = new ListaEnlazada<>();
+        Nodo<Experimento> actual = experimentosNoEjecutados.getHead();
+        while (actual!=null){
+            if(actual.dato.getDataset().getId().equals(datasetId)){
+                resultados.agregar(actual.dato);
+            }
+            actual = actual.siguiente;
+        }
+        actual = experimentosEjecutados.getHead();
+        while (actual!=null){
+            if(actual.dato.getDataset().getId().equals(datasetId)){
+                resultados.agregar(actual.dato);
+            }
+            actual = actual.siguiente;
+        }
+        return resultados;
     }
 
     public ListaEnlazada<Experimento> buscarExperimentoEjecutadoPorModelo(String modeloId){
         ListaEnlazada<Experimento> resultados = new ListaEnlazada<>();
-        Nodo<Experimento> actual = experimentoLista.getHead();
+        Nodo<Experimento> actual = experimentosEjecutados.getHead();
         while (actual!=null){
-            if(actual.dato.getModelo().getId().equals(modeloId) && actual.dato.getEstado() == Estado.EJECUTADO){
+            if(actual.dato.getModelo().getId().equals(modeloId)){
                 resultados.agregar(actual.dato);
             }
             actual = actual.siguiente;
@@ -59,14 +115,58 @@ public class ExperimentoManager {
 
     public ListaEnlazada<Experimento> buscarExperimentoEjecutadoPorDataset(String datasetId){
         ListaEnlazada<Experimento> resultados = new ListaEnlazada<>();
-        Nodo<Experimento> actual = experimentoLista.getHead();
+        Nodo<Experimento> actual = experimentosEjecutados.getHead();
         while (actual!=null){
-            if(actual.dato.getDataset().getId().equals(datasetId) && actual.dato.getEstado() == Estado.EJECUTADO){
+            if(actual.dato.getDataset().getId().equals(datasetId)){
                 resultados.agregar(actual.dato);
             }
             actual = actual.siguiente;
         }
         return resultados;
+    }
+
+    public ListaEnlazada<Experimento> buscarExperimentoNoEjecutadoPorDataset(String datasetId){
+        ListaEnlazada<Experimento> resultados = new ListaEnlazada<>();
+        Nodo<Experimento> actual = experimentosNoEjecutados.getHead();
+        while (actual!=null){
+            if(actual.dato.getDataset().getId().equals(datasetId)){
+                resultados.agregar(actual.dato);
+            }
+            actual = actual.siguiente;
+        }
+        return resultados;
+    }
+
+    public ListaEnlazada<Experimento> buscarExperimentoNoEjecutadoPorModelo(String modeloId){
+        ListaEnlazada<Experimento> resultados = new ListaEnlazada<>();
+        Nodo<Experimento> actual = experimentosNoEjecutados.getHead();
+        while (actual!=null){
+            if(actual.dato.getModelo().getId().equals(modeloId)){
+                resultados.agregar(actual.dato);
+            }
+            actual = actual.siguiente;
+        }
+        return resultados;
+    }
+
+    public ListaEnlazada<Experimento> getExperimentosEjecutados() {
+        return experimentosEjecutados;
+    }
+
+    public ListaEnlazada<Experimento> getExperimentosNoEjecutados() {
+        return experimentosNoEjecutados;
+    }
+
+    public void ejecutarExperimento(String experimentoId){
+        Experimento experimento = searchExperimento(experimentoId);
+        if (experimento.ejecutar()) {
+            experimentosEjecutados.agregar(experimento);
+            experimentosNoEjecutados.remover(experimento);
+
+        }
+        else{
+            throw new IllegalArgumentException("No se pudo ejecutar el experimento con ID: " + experimentoId);
+        }
     }
 }
 
