@@ -6,7 +6,7 @@ import java.util.Objects;
 
 
 public class DatasetsManager {
-    private ListaEnlazada<Dataset> datasetList = new ListaEnlazada<Dataset>();
+    private ListaEnlazada<Dataset> datasetList = new ListaEnlazada<>();
 
     public void createDataset(String id, String name, int size, TipoProblema problemType) {
 
