@@ -43,6 +43,16 @@ public class ExperimentoManager {
         }      
     }
 
+    public Experimento searchExperimentoNoEjecutado(String id){
+        Experimento existente = experimentosNoEjecutados.buscar(m -> Objects.equals(m.getId(), id));
+        if (existente!= null){
+            return existente;
+        }
+        else{
+            throw new IllegalArgumentException("No existe un experimento no ejecutado con ID: " + id);
+        }
+    }
+
     public ListaEnlazada<Experimento> listarPorModelo(){
         ListaEnlazada<Experimento> todosLosExperimentos = new ListaEnlazada<>();
         todosLosExperimentos.agregarTodos(experimentosNoEjecutados);
@@ -158,7 +168,7 @@ public class ExperimentoManager {
     }
 
     public void ejecutarExperimento(String experimentoId){
-        Experimento experimento = searchExperimento(experimentoId);
+        Experimento experimento = searchExperimentoNoEjecutado(experimentoId);
         if (experimento.ejecutar()) {
             experimentosEjecutados.agregar(experimento);
             experimentosNoEjecutados.remover(experimento);

@@ -1,1 +1,2 @@
 Experimento - ID: M1-D1, eficiencia: 184, accuracy: 23, precision: 24, tiempo: 3
+Experimento - ID: M2-D2, eficiencia: 189, accuracy: 71, precision: 8, tiempo: 3

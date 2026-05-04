@@ -169,6 +169,7 @@ public class Main {
                     String expIdToExecute = scanner.next();
                     try {
                         experimentoManager.ejecutarExperimento(expIdToExecute);
+
                         System.out.println("Experimento ejecutado exitosamente.");
                     } catch (IllegalArgumentException e) {
                         System.out.println(e.getMessage());

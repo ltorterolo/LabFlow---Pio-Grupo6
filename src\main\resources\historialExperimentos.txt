@@ -38,3 +38,9 @@ Experimento - ID: exp1, eficiencia: 921, accuracy: 55, precision: 67, tiempo: 4
 Experimento - ID: exp2, eficiencia: 549, accuracy: 54, precision: 61, tiempo: 6
 Experimento - ID: exp1, eficiencia: 540, accuracy: 90, precision: 36, tiempo: 6
 Experimento - ID: exp1, eficiencia: 483, accuracy: 49, precision: 79, tiempo: 8
+Experimento - ID: M1-D1, eficiencia: 297, accuracy: 47, precision: 19, tiempo: 3
+Experimento - ID: M1-D2, eficiencia: 369, accuracy: 56, precision: 33, tiempo: 5
+Experimento - ID: M2-D2, eficiencia: 365, accuracy: 85, precision: 43, tiempo: 10
+Experimento - ID: M1-D1, eficiencia: 4140, accuracy: 91, precision: 91, tiempo: 2
+Experimento - ID: M1-D1, eficiencia: 70, accuracy: 47, precision: 3, tiempo: 2
+Experimento - ID: M1-D2, eficiencia: 250, accuracy: 94, precision: 24, tiempo: 9

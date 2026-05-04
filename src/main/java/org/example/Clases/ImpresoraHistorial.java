@@ -5,7 +5,7 @@ import java.io.*;
 public class ImpresoraHistorial {
     
     public static void imprimir(String texto){
-        try (BufferedWriter br = new BufferedWriter(new FileWriter("src\\main\\resources\\historialExperimentos.txt", true))) 
+        try (BufferedWriter br = new BufferedWriter(new FileWriter("src/main/resources/historialExperimentos.txt", true)))
         {
         br.write(texto);
         br.newLine(); // Agrega un salto de línea dependiente del sistema
