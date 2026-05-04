@@ -26,6 +26,8 @@ public class Modelo {
         return tipo;
     }
 
+    public ListaEnlazada<String> getParametrosAsociados() {return parametrosAsociados;}
+
     public boolean agregarParametro(String parametro){
         parametrosAsociados.agregar(parametro);
         return true;

@@ -2,7 +2,6 @@ package org.example.Clases;
 
 import org.example.TDAs.ListaEnlazada;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.provider.EnumSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -122,4 +121,140 @@ public class ExperimentoManagerTest {
         assertEquals("exp1", resultados.getHead().dato.getId());
         assertEquals("exp2", resultados.getHead().siguiente.dato.getId());
     }
+
+    @Test
+    public void buscarEjecutadoPorModeloIsHeadTest(){
+        Modelo modelo1 = new Modelo("id2", "modelo", TipoModelo.RED_NEURONAL);
+        experimentoManager.crearExperimento("exp1", dataset, modelo);
+        experimentoManager.crearExperimento("exp2", dataset, modelo1);
+        experimentoManager.ejecutarExperimento("exp1");
+        experimentoManager.ejecutarExperimento("exp2");
+        ListaEnlazada<Experimento> resultados = experimentoManager.buscarExperimentoEjecutadoPorModelo("id1");
+        assertEquals(1, resultados.tamaño());
+        assertEquals("exp1", resultados.getHead().dato.getId());
+    }
+
+    @Test
+    public void buscarEjecutadoPorModeloNotExistTest() {
+        ListaEnlazada<Experimento> resultados = experimentoManager.buscarExperimentoEjecutadoPorModelo("id1");
+        assertEquals(0, resultados.tamaño());
+    }
+
+    @Test
+    public void buscarEjecutadoPorModeloInEjecutadosTest() {
+        experimentoManager.crearExperimento("exp1", dataset, modelo);
+        experimentoManager.crearExperimento("exp2", dataset, modelo);
+        experimentoManager.ejecutarExperimento("exp1");
+        experimentoManager.ejecutarExperimento("exp2");
+        ListaEnlazada<Experimento> resultados = experimentoManager.buscarExperimentoEjecutadoPorModelo("id1");
+        assertEquals(2, resultados.tamaño());
+        assertEquals("exp1", resultados.getHead().dato.getId());
+        assertEquals("exp2", resultados.getHead().siguiente.dato.getId());
+    }
+
+    @Test
+    public void buscarEjecutadoPorDatasetIsHeadTest(){
+        Dataset dataset1 = new Dataset("id2", "dataset", 3, TipoProblema.REGRESION);
+        experimentoManager.crearExperimento("exp1", dataset, modelo);
+        experimentoManager.crearExperimento("exp2", dataset1, modelo);
+        experimentoManager.ejecutarExperimento("exp1");
+        experimentoManager.ejecutarExperimento("exp2");
+        ListaEnlazada<Experimento> resultados = experimentoManager.buscarExperimentoEjecutadoPorDataset("id1");
+        assertEquals(1, resultados.tamaño());
+        assertEquals("exp1", resultados.getHead().dato.getId());
+    }
+
+    @Test
+    public void buscarEjecutadoPorDatasetNotExistTest(){
+        ListaEnlazada<Experimento> resultados = experimentoManager.buscarExperimentoEjecutadoPorDataset("id1");
+        assertEquals(0, resultados.tamaño());
+    }
+
+    @Test
+    public void buscarEjecutadoPorDatasetInEjecutadosTest(){
+        experimentoManager.crearExperimento("exp1", dataset, modelo);
+        experimentoManager.crearExperimento("exp2", dataset, modelo);
+        experimentoManager.ejecutarExperimento("exp1");
+        experimentoManager.ejecutarExperimento("exp2");
+        ListaEnlazada<Experimento> resultados = experimentoManager.buscarExperimentoEjecutadoPorDataset("id1");
+        assertEquals(2, resultados.tamaño());
+        assertEquals("exp1", resultados.getHead().dato.getId());
+        assertEquals("exp2", resultados.getHead().siguiente.dato.getId());
+    }
+
+    @Test
+    public void buscarNoEjecutadoPorModeloIsHeadTest(){
+        Modelo modelo1 = new Modelo("id2", "modelo", TipoModelo.RED_NEURONAL);
+        experimentoManager.crearExperimento("exp1", dataset, modelo);
+        experimentoManager.crearExperimento("exp2", dataset, modelo1);
+        ListaEnlazada<Experimento> resultados = experimentoManager.buscarExperimentoNoEjecutadoPorModelo("id1");
+        assertEquals(1, resultados.tamaño());
+        assertEquals("exp1", resultados.getHead().dato.getId());
+    }
+
+    @Test
+    public void buscarNoEjecutadoPorModeloNotExistTest() {
+        ListaEnlazada<Experimento> resultados = experimentoManager.buscarExperimentoNoEjecutadoPorModelo("id1");
+        assertEquals(0, resultados.tamaño());
+    }
+
+    @Test
+    public void buscarNoEjecutadoPorModeloInNoEjecutadosTest() {
+        experimentoManager.crearExperimento("exp1", dataset, modelo);
+        experimentoManager.crearExperimento("exp2", dataset, modelo);
+        ListaEnlazada<Experimento> resultados = experimentoManager.buscarExperimentoNoEjecutadoPorModelo("id1");
+        assertEquals(2, resultados.tamaño());
+        assertEquals("exp1", resultados.getHead().dato.getId());
+        assertEquals("exp2", resultados.getHead().siguiente.dato.getId());
+    }
+
+     @Test
+    public void buscarNoEjecutadoPorDatasetIsHeadTest() {
+         Dataset dataset1 = new Dataset("id2", "dataset", 3, TipoProblema.REGRESION);
+         experimentoManager.crearExperimento("exp1", dataset, modelo);
+         experimentoManager.crearExperimento("exp2", dataset1, modelo);
+         ListaEnlazada<Experimento> resultados = experimentoManager.buscarExperimentoNoEjecutadoPorDataset("id1");
+         assertEquals(1, resultados.tamaño());
+         assertEquals("exp1", resultados.getHead().dato.getId());
+    }
+
+    @Test
+    public void buscarNoEjecutadoPorDatasetNotExistTest() {
+        ListaEnlazada<Experimento> resultados = experimentoManager.buscarExperimentoNoEjecutadoPorDataset("id1");
+        assertEquals(0, resultados.tamaño());
+    }
+
+    @Test
+    public void buscarNoEjecutadoPorDatasetInNoEjecutadosTest() {
+        experimentoManager.crearExperimento("exp1", dataset, modelo);
+        experimentoManager.crearExperimento("exp2", dataset, modelo);
+        ListaEnlazada<Experimento> resultados = experimentoManager.buscarExperimentoNoEjecutadoPorDataset("id1");
+        assertEquals(2, resultados.tamaño());
+        assertEquals("exp1", resultados.getHead().dato.getId());
+        assertEquals("exp2", resultados.getHead().siguiente.dato.getId());
+    }
+
+    @Test
+    public void getExperimentosEjecutadosTest(){
+        experimentoManager.crearExperimento("exp1", dataset, modelo);
+        experimentoManager.crearExperimento("exp2", dataset, modelo);
+        experimentoManager.ejecutarExperimento("exp1");
+        ListaEnlazada<Experimento> ejecutados = experimentoManager.getExperimentosEjecutados();
+        assertEquals(1, ejecutados.tamaño());
+        assertEquals("exp1", ejecutados.getHead().dato.getId());
+    }
+
+    @Test
+    public void ejecutarExperimentoNotExistTest(){
+        assertThrows(IllegalArgumentException.class, () -> experimentoManager.ejecutarExperimento("exp1"));
+    }
+
+    @Test
+    public void ejecutarExperimentoIsAlreadyEjecutado(){
+        experimentoManager.crearExperimento("exp1", dataset, modelo);
+        experimentoManager.ejecutarExperimento("exp1");
+        assertThrows(IllegalArgumentException.class, () -> experimentoManager.ejecutarExperimento("exp1"));
+    }
+
+
 }
