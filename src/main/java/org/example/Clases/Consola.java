@@ -1,41 +1,55 @@
-package org.example;
+package org.example.Clases;
 
-import org.example.Clases.*;
+import java.util.Scanner;
 
+import org.example.TDAs.ListaEnlazada;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    public static void main(String[] args) {
-        Consola consola = new Consola();
-        consola.recibirDato();
-        /*int opcion;
-        ExperimentoManager experimentoManager = new ExperimentoManager();
-        DatasetsManager datasetsManager = new DatasetsManager();
-        ModeloManager modeloManager = new ModeloManager();
-        Scanner scanner = new Scanner(System.in);
-        do {
-            System.out.println("Seleccione una opción:");
-            System.out.println("1. Crear Dataset");
-            System.out.println("2. Crear Modelo");
-            System.out.println("3. Listar Datasets");
-            System.out.println("4. Listar Modelos");
-            System.out.println("5. Crear Experimento");
-            System.out.println("6. Ejecutar Experimento");
-            System.out.println("7. Buscar todos los experimentos por Modelo");
-            System.out.println("8. Buscar todos los experimentos por Dataset");
-            System.out.println("9. Ordenar Experimentos por Modelo");
-            System.out.println("10. Ordenar Experimentos por Dataset");
-            System.out.println("11. Buscar Experimentos ejecutados por Modelo");
-            System.out.println("12. Buscar Experimento ejecutados por Dataset");
-            System.out.println("13. Eliminar modelo");
-            System.out.println("14. Eliminar dataset");
-            System.out.println("0. Salir");
+public class Consola {
+        private ExperimentoManager experimentoManager;
+        private DatasetsManager datasetsManager;
+        private ModeloManager modeloManager;
+        private Scanner scanner;
+
+    public Consola(){
+        this.experimentoManager = new ExperimentoManager();
+        this.datasetsManager = new DatasetsManager();
+        this.modeloManager = new ModeloManager();
+        this.scanner = new Scanner(System.in);
+    };
+    public Consola(ExperimentoManager experimentoManager, DatasetsManager datasetsManager, ModeloManager modeloManager, Scanner scanner){
+        this.datasetsManager = datasetsManager;
+        this.experimentoManager = experimentoManager;
+        this.modeloManager = modeloManager;
+        this.scanner = scanner;
+    }
+
+    public void recibirDato(){
+        String imprimir = """
+            Seleccione una opción: \n
+            1. Crear Dataset \n
+            2. Crear Modelo \n
+            3. Listar Datasets \n
+            4. Listar Modelos \n
+            5. Crear Experimento \n
+            6. Ejecutar Experimento \n
+            7. Buscar todos los experimentos por Modelo \n
+            8. Buscar todos los experimentos por Dataset \n
+            9. Ordenar Experimentos por Modelo \n
+            10. Ordenar Experimentos por Dataset \n
+            11. Buscar Experimentos ejecutados por Modelo \n
+            12. Buscar Experimento ejecutados por Dataset \n
+            13. Eliminar modelo \n
+            14. Eliminar dataset \n
+            0. Salir \n
+            """;
+            System.out.println(imprimir);
 
             System.out.print("\nIngrese su opción: ");
-            opcion = scanner.nextInt();
+            int opcion = scanner.nextInt();
+            switchCases(opcion);
+    }
 
-
+    public void switchCases(int opcion){
             switch (opcion) {
                 case 1:
                     System.out.println("Ingrese ID del Dataset:");
@@ -67,6 +81,10 @@ public class Main {
                         System.out.println("Dataset creado exitosamente.");
                     } catch (IllegalArgumentException e) {
                         System.out.println(e.getMessage());
+                    }
+
+                    if(opcion != 0){
+                        recibirDato();
                     }
                     break;
                 case 2:
@@ -113,30 +131,51 @@ public class Main {
                     } catch (IllegalArgumentException e) {
                         System.out.println(e.getMessage());
                     }
+                    if(opcion != 0){
+                        recibirDato();
+                    }
                     break;
                 case 3:
                     if (datasetsManager.getDatasetList().tamaño() == 0) {
                         System.out.println("No hay datasets disponibles. Por favor, cree un dataset primero.");
+                        if(opcion != 0){
+                            recibirDato();
+                        }
                         break;
                     }
                     System.out.println("Datasets disponibles:");
                     datasetsManager.listarDatasets();
+                    if(opcion != 0){
+                        recibirDato();
+                    }
                     break;
                 case 4:
                     if (modeloManager.getModeloList().tamaño() == 0) {
                         System.out.println("No hay modelos disponibles. Por favor, cree un modelo primero.");
-                        break;
+                        if(opcion != 0){
+                            recibirDato();
+                        }
+                     break;
                     }
                     System.out.println("Modelos disponibles:");
                     modeloManager.listarModelos();
+                    if(opcion != 0){
+                        recibirDato();
+                    }
                     break;
                 case 5:
                     if (datasetsManager.getDatasetList().tamaño() == 0) {
                         System.out.println("No hay datasets disponibles. Por favor, cree un dataset primero.");
-                        break;
+                        if(opcion != 0){
+                            recibirDato();
+                        }
+                     break;
                     }
                     if (modeloManager.getModeloList().tamaño() == 0) {
                         System.out.println("No hay modelos disponibles. Por favor, cree un modelo primero.");
+                        if(opcion != 0){
+                            recibirDato();
+                        }
                         break;
                     }
                     System.out.println("Para crear un experimento, primero debe seleccionar un dataset y un modelo.");
@@ -157,11 +196,17 @@ public class Main {
                     } catch (IllegalArgumentException e) {
                         System.out.println(e.getMessage());
                     }
+                    if(opcion != 0){
+                        recibirDato();
+                    }
                     break;
                 case 6:
                     if(experimentoManager.getExperimentosNoEjecutados().tamaño() == 0){
                         System.out.println("No hay experimentos no ejecutados disponibles. Por favor, cree un experimento primero.");
-                        break;
+                        if(opcion != 0){
+                            recibirDato();
+                        }
+                     break;
                     }
                     System.out.println("Experimentos no ejecutados disponibles:");
                     experimentoManager.getExperimentosNoEjecutados().imprimir();
@@ -174,11 +219,17 @@ public class Main {
                     } catch (IllegalArgumentException e) {
                         System.out.println(e.getMessage());
                     }
+                    if(opcion != 0){
+                        recibirDato();
+                    }
                     break;
                 case 7:
                     if (modeloManager.getModeloList().tamaño() == 0) {
                         System.out.println("No hay modelos disponibles. Por favor, cree un modelo primero.");
-                        break;
+                        if(opcion != 0){
+                            recibirDato();
+                        }
+                     break;
                     }
                     System.out.println("Modelos disponibles:");
                     modeloManager.listarModelos();
@@ -195,11 +246,17 @@ public class Main {
                     } catch (IllegalArgumentException e) {
                         System.out.println(e.getMessage());
                     }
+                    if(opcion != 0){
+                        recibirDato();
+                    }
                     break;
                 case 8:
                     if (datasetsManager.getDatasetList().tamaño() == 0) {
                         System.out.println("No hay datasets disponibles. Por favor, cree un dataset primero.");
-                        break;
+                        if(opcion != 0){
+                            recibirDato();
+                        }
+                     break;
                     }
                     System.out.println("Datasets disponibles:");
                     datasetsManager.listarDatasets();
@@ -216,19 +273,31 @@ public class Main {
                     } catch (IllegalArgumentException e) {
                         System.out.println(e.getMessage());
                     }
+                    if(opcion != 0){
+                        recibirDato();
+                    }
                     break;
                 case 9:
                     System.out.println("Experimentos ordenados por Modelo:");
                     experimentoManager.listarPorModelo();
+                    if(opcion != 0){
+                        recibirDato();
+                    }
                     break;
                 case 10:
                     System.out.println("Experimentos ordenados por Dataset:");
                     experimentoManager.listarPorDataset();
+                    if(opcion != 0){
+                        recibirDato();
+                    }
                     break;
                 case 11:
                     if (modeloManager.getModeloList().tamaño() == 0) {
                         System.out.println("No hay modelos disponibles. Por favor, cree un modelo primero.");
-                        break;
+                        if(opcion != 0){
+                            recibirDato();
+                        }
+                     break;
                     }
                     System.out.println("Modelos disponibles:");
                     modeloManager.listarModelos();
@@ -245,11 +314,17 @@ public class Main {
                     } catch (IllegalArgumentException e) {
                         System.out.println(e.getMessage());
                     }
+                    if(opcion != 0){
+                        recibirDato();
+                    }
                     break;
                 case 12:
                     if (datasetsManager.getDatasetList().tamaño() == 0) {
                         System.out.println("No hay datasets disponibles. Por favor, cree un modelo primero.");
-                        break;
+                        if(opcion != 0){
+                            recibirDato();
+                        }
+                     break;
                     }
                     System.out.println("Datasets disponibles:");
                     datasetsManager.listarDatasets();
@@ -266,11 +341,17 @@ public class Main {
                     } catch (IllegalArgumentException e) {
                         System.out.println(e.getMessage());
                     }
+                    if(opcion != 0){
+                        recibirDato();
+                    }
                     break;
                 case 13:
                     if (modeloManager.getModeloList().tamaño() == 0) {
                         System.out.println("No hay modelos disponibles. Por favor, cree un modelo primero.");
-                        break;
+                        if(opcion != 0){
+                            recibirDato();
+                        }
+                     break;
                     }
                     System.out.println("Modelos disponibles:");
                     modeloManager.listarModelos();
@@ -279,7 +360,10 @@ public class Main {
 
                     if(experimentoManager.buscarExperimentoNoEjecutadoPorModelo(modeloIdToDelete).tamaño()!=0){
                         System.out.println("No se puede eliminar el modelo con ID: " + modeloIdToDelete + " porque tiene experimentos no ejecutados asociados.");
-                        break;
+                        if(opcion != 0){
+                            recibirDato();
+                        }
+                     break;
                     }
 
                     try {
@@ -288,11 +372,17 @@ public class Main {
                     } catch (IllegalArgumentException e) {
                         System.out.println(e.getMessage());
                     }
+                    if(opcion != 0){
+                        recibirDato();
+                    }
                     break;
                 case 14:
                     if (datasetsManager.getDatasetList().tamaño() == 0) {
                         System.out.println("No hay datasets disponibles. Por favor, cree un dataset primero.");
-                        break;
+                        if(opcion != 0){
+                            recibirDato();
+                        }
+                     break;
                     }
                     System.out.println("Datasets disponibles:");
                     datasetsManager.listarDatasets();
@@ -301,7 +391,10 @@ public class Main {
 
                     if(experimentoManager.buscarExperimentoNoEjecutadoPorDataset(datasetIdToDelete).tamaño()!=0){
                         System.out.println("No se puede eliminar el dataset con ID: " + datasetIdToDelete + " porque tiene experimentos no ejecutados asociados.");
-                        break;
+                        if(opcion != 0){
+                            recibirDato();
+                        }
+                     break;
                     }
 
                     try {
@@ -310,16 +403,18 @@ public class Main {
                     } catch (IllegalArgumentException e) {
                         System.out.println(e.getMessage());
                     }
+                        if(opcion != 0){
+                            recibirDato();
+                        }
                      break;
                 case 0:
                     System.out.println("Saliendo...");
+                    if(opcion != 0){
+                        recibirDato();
+                    }
                     break;
                 default:
                     System.out.println("Opción no válida, intente de nuevo.");
             }
-        }while (opcion!=0);*/
     }
 }
-
-
-    
